@@ -10,10 +10,29 @@ i = 0
 # Lista para almacenar las letras adivinadas
 guessed_letters = []
 print("¡Bienvenido al juego de adivinanzas!")
+print ("Elige la dificultad del juego (FACIL-MEDIA-DIFICIL)")
+# Se ingresa el modo elegido 
+dificultad = input("Ingresar:")
+
+# Mostrarla palabra parcialmente adivinada segun su dificultad
+if dificultad == "FACIL" :
+   revealed_letters = ['a','e','i','o','u']
+elif dificultad == "MEDIA":
+   revealed_letters = [secret_word[0],secret_word[-1]]
+else:
+  revealed_letters = []
+
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
-word_displayed = "_" * len(secret_word)
-# Mostrarla palabra parcialmente adivinada
+word_displayed = "" 
+for letter in secret_word:
+  if letter in revealed_letters:
+    word_displayed += letter
+  else:
+     word_displayed += "_"
+
+#Mostrar la palbra parcialmente adivinada
 print(f"Palabra: {word_displayed}")
+
 
 while i < max_fails:
  # Pedir al jugador que ingrese una letra
@@ -42,7 +61,7 @@ while i < max_fails:
  # Mostrar la palabra parcialmente adivinada
  letters = []
  for letter in secret_word:
-   if letter in guessed_letters:
+   if letter in guessed_letters or letter in revealed_letters:
      letters.append(letter)
    else:
      letters.append("_")
